@@ -31,12 +31,87 @@ include './backend/get_data.php';
     </nav>
 </header>
 
+<!-- modal window -->
+<div class="modal fade" id="ModalCenter" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalLongTitle">Add message</h5>
+                <button type="button" class="close" data-mdb-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="./backend/post_message.php">
+                    <h6 class="modal-title" id="ModalLongTitle">message text</h6>
+                    <textarea class="form-control modal-message-text" style="height: 200px" id="message-text name="message"
+                              v-model="newImageSource"
+                              placeholder="Simple wine cake. This cake was sent home from our children's school. It is the simplest, best-tasting cake I've ever made. Great to make with the kids, especially for cupcakes."></textarea>
+                    <div class="input-wrapper d-flex">
+                        <div class="d-flex justify-content-center" style="width: 70px">
+                            <label for="tag">tag</label>
+                        </div>
+                        <input id="tag" list="tags" name="tag">
+                        <datalist id="tags">
 
-<div class="d-flex justify-content-center add-link">
-    <a type="button" class="mt-2 mb-4 btn btn-primary" href="./add_message.php">
-        Add message
-    </a>
+                            <?php
+
+                            $tags = getTags();
+                            for ($n = 0; $n < count($tags); $n++) {
+                                echo '<option value="' . $tags[$n] . '">'; // Вывод уже существующих тегов
+                            }
+                            ?>
+
+                        </datalist>
+                    </div>
+                    <div class="input-wrapper d-flex">
+                        <div class="d-flex justify-content-center" style="width: 70px">
+                            <label for="channel">channel</label>
+                        </div>
+                        <input id="channel" list="channels" name="channel">
+                        <datalist id="channels">
+
+                            <?php
+                            $channels = getChannels();
+                            for ($n = 0; $n < count($channels); $n++) {
+                                echo '<option value="' . $channels[$n] . '">'; // Вывод каналов
+                            }
+                            ?>
+
+                        </datalist>
+                    </div>
+
+                    <div class="form-check my-2">
+                        <input class="form-check-input" type="radio" name="message-type" id="public" value="public"
+                               checked>
+                        <label class="form-check-label" for="public">
+                            Public message
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="message-type" id="private"
+                               value="private">
+                        <label class="form-check-label" for="private">
+                            Private message
+                        </label>
+                    </div>
+                    <div class="">
+                        <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" data-mdb-dismiss="modal">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
+
+<div class="d-flex justify-content-center" style="margin-top: 200px">
+    <button type="button" class="mt-2 mb-4 btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#ModalCenter">
+        Add message
+    </button>
+</div>
+
 <main class="container d-flex">
     <div class="container">
         <form method="post" action="./results.php">
@@ -66,20 +141,20 @@ include './backend/get_data.php';
                 </datalist>
             </div>
 
-            <label for="channel">Channel: </label>
-            <input id="channel" list="channels" name="channel" placeholder="default channel">
+            <div class="input-group mt-2 mb-4">
+                <input type="search" class="form-control rounded" list="channels" placeholder="type a channel"
+                       aria-label="Search" aria-describedby="search-addon" name="channel"/>
+                <datalist id="channels">
 
-            <datalist id="channels">
+                    <?php
+                    $channels = getChannels();
+                    for ($n = 0; $n < count($channels); $n++) {
+                        echo '<option value="' . $channels[$n] . '">'; // Вывод уже существующих тегов
+                    }
+                    ?>
 
-                <?php
-                $channels = getChannels();
-                for ($n = 0; $n < count($channels); $n++) {
-                    echo '<option value="' . $channels[$n] . '">'; // Вывод уже существующих тегов
-                }
-                ?>
-
-            </datalist>
-
+                </datalist>
+            </div>
             <div class="d-flex justify-content-center">
                 <button type="submit" class="btn btn-primary">Search</button>
             </div>
