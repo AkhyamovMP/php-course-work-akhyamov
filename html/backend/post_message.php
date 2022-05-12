@@ -24,4 +24,4 @@
         post_message($message, $tagId, $_SESSION['userId'], $channelId, $isPrivate);
     } catch (Exception $e) {
     }
-    header('Location: ../add_message.php');
+    header('Location: ../search.php');
