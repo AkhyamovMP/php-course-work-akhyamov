@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS sorter;
+DROP DATABASE IF EXISTS php_db;
 
-CREATE DATABASE sorter;
+CREATE DATABASE php_db;
 
-USE sorter;
+USE php_db;
 
 CREATE TABLE Users (
     id SERIAL PRIMARY KEY,

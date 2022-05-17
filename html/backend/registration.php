@@ -2,8 +2,8 @@
 
     session_start();
 
-    include_once 'database.php';
-    include_once 'get_data.php';
+    include_once 'db_tools.php';
+    include_once 'data.php';
 
     $type = $_POST['type'];
     $username = $_POST['username'];
@@ -20,7 +20,7 @@
             $_SESSION['userId'] = exec_query('SELECT * FROM Users WHERE email = ' . add_quotes($login))->fetch_assoc()['id'];
             $_SESSION['username'] = $username;
             $_SESSION['login'] = $login;
-            header('Location: ../search.php');
+            header('Location: ../main.php');
         }
     }
     else
@@ -37,7 +37,7 @@
                 $_SESSION['userId'] = $row['id'];
                 $_SESSION['username'] = $row['username'];
                 $_SESSION['login'] = $login;
-                header('Location: ../search.php');
+                header('Location: ../main.php');
             }
         }
     }

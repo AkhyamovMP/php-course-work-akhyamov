@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include './backend/get_data.php';
+    include './backend/data.php';
 ?>
 
 <!DOCTYPE html>
